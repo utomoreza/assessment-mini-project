@@ -19,16 +19,15 @@
 
 ## Repository Structure
 
-- ./
--- asset -> consisting of images of models
--- dataset -> consisting of datasets used for training models
--- model -> consisting of saved, trained models
--- notebook -> consisting of notebooks used to explore the use cases
--- sample -> consisting of sample data to test the models
--- script -> consisting of scripts to run training and inference pipeline
--- LICENSE
--- README.md
--- requirements.txt -> listing libraries used in this mini project
+- `asset/` -> consisting of images of models
+- `dataset/` -> consisting of datasets used for training models
+- `model/` -> consisting of saved, trained models
+- `notebook/` -> consisting of notebooks used to explore the use cases
+- `sample/` -> consisting of sample data to test the models
+- `script/` -> consisting of scripts to run training and inference pipeline
+- `LICENSE`
+- `README.md`
+- `requirements.txt` -> listing libraries used in this mini project
 
 **Notes:** Not all models for each use case is saved in this repo since some models are too big to be included here.
 
@@ -41,11 +40,11 @@
 
 ### For notebooks
 
-You can explore the step-by-step process for each use case in the directory `./assessment-mini-project/notebook`.
+You can explore the step-by-step process for each use case in the directory [`./assessment-mini-project/notebook`](./assessment-mini-project/notebook).
 
 ### For training & inference pipelines
 
-- Go to directory script `cd assessment-mini-project/script/<your-desired-usecase>`
+- Go to the directory [`script`](./assessment-mini-project/script) `cd assessment-mini-project/script/<your-desired-usecase>`
 - Run the Python script `python train.py --<arg>==<param>` for training pipeline
 - Run the Python script `python inference.py --<arg>==<param>` for inference pipeline
 
