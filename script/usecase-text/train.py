@@ -1,8 +1,9 @@
-"""
-"""
+"""Script for Training Pipeline in use case Text"""
+
 import os
-import pickle
 import argparse
+
+import numpy as np
 
 import nltk
 nltk.download('stopwords')
@@ -14,20 +15,33 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from datasets import load_dataset
 
 from utils import (
+    NUM_WORDS,
+    OOV_TOKEN,
     PAD_TYPE,
     TRUNC_TYPE,
+    embed_dim,
+    num_heads,
+    ff_dim,
+    EPOCHS,
+    BATCH_SIZE,
     cleanse_text,
     tokenize,
     padding,
     find_optimum_maxlen,
     LstmModel,
-    TransformerModel
+    TransformerModel,
+    save_tokenizer_model
 )
+
+# Set the seed value for experiment reproducibility.
+seed = 1
+tf.random.set_seed(seed)
+np.random.seed(seed)
 
 ##########################
 
 # collect args
-parser = argparse.ArgumentParser(description='Process some integers.')
+parser = argparse.ArgumentParser(description='Training a model for Text Classification.')
 parser.add_argument("--model-type", type=str,
                     help="Set a model to train, whether LSTM or Transformer",
                     required=True)
@@ -125,6 +139,8 @@ X_train = tf.squeeze(train_data["ids"], axis=[1])
 y_train = train_data["label"]
 X_valid = tf.squeeze(valid_data["ids"], axis=[1])
 y_valid = valid_data["label"]
+X_test = tf.squeeze(test_data["ids"], axis=[1])
+y_test = test_data["label"]
 
 ## SETUP MODEL ARCHITECTURE
 print("Preparing for modelling ...")
@@ -156,16 +172,11 @@ history = model.fit(
 )
 
 # evaluate the trained model
-test_loss, test_acc = model.evaluate(X_train, y_train)
+test_loss, test_acc = model.evaluate(X_test, y_test)
 print('Test Loss:', test_loss)
 print('Test Accuracy:', test_acc)
 
 # save the trained model
 if saved_model_path:
     print("Saving the trained tokenizer and model ...")
-    # save tokenizer
-    with open(f"{saved_model_path}/tokenizer.pickle", 'wb') as handle:
-        pickle.dump((tokenizer, max_length), handle, protocol=pickle.HIGHEST_PROTOCOL)
-    # save entire model
-    model.save(f"{saved_model_path}/model.keras")
-    print(f"Tokenizer and the entire model saved successfully in {saved_model_path}")
+    save_tokenizer_model(tokenizer, model, max_length, saved_model_path)
