@@ -79,9 +79,13 @@ history = model.fit(
 )
 
 # evaluate the trained model
-test_loss, test_acc = model.evaluate(X_test, y_test)
-print('Test Loss:', test_loss)
-print('Test Accuracy:', test_acc)
+test_loss, test_acc, test_prec, test_rec, test_f1score = model.evaluate(X_test, y_test)
+print("Test Loss:", test_loss)
+print("Test Accuracy:", test_acc)
+print("Test Precision:", test_prec)
+print("Test Recall:", test_rec)
+for idx, score in enumerate(test_f1score):
+    print(f"Test F1-Score for label {idx}-{code_to_label[idx]}:", score)
 
 # save the trained model
 if saved_model_path:
