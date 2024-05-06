@@ -6,16 +6,19 @@
 
 - Two model architectures, i.e. LSTM and Vanilla Transformer
 - Trained on IMDB dataset
+- The LSTM architecture is shown [here](./asset/model_lstm.png), whereas that of Vanilla Transformer is [here](./asset/model_transformer.png)
 
 ### Image Classification
 
 - Using ResNet-34 model architecture
 - Trained on CIFAR-10 dataset
+- The ResNet-34 architecture is shown [here](./asset/model_resnet.png)
 
 ### Audio Recognition
 
 - Using CNN 2D
 - Trained on Speed Commands dataset
+- The model architecture is shown [here](./asset/model_audio.png)
 
 ## Repository Structure
 
