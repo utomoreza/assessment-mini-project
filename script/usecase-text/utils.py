@@ -9,8 +9,6 @@ from matplotlib import pyplot as plt
 import tensorflow as tf
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
-from keras import ops
-
 #########################
 
 PAD_TYPE = "post"
