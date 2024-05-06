@@ -34,7 +34,7 @@ parser.add_argument("--saved-model-path", type=str,
 #                     default=None)
 args = parser.parse_args()
 saved_model_path = args.saved_model_path
-interactive = args.interactive
+interactive = True #args.interactive
 
 ##########################
 
@@ -56,10 +56,10 @@ stopword_set = set(stopwords.words("english")) # load stopwords remover
 if interactive:
     user_input = ""
     while user_input.lower() != "end":
-        user_input = "Input your text to be predicted. Or type 'end' to stop.\n"
-    pred, proba = predict(
-        user_input, trained_model, stopword_set,
-        trained_tokenizer, PAD_TYPE, TRUNC_TYPE, max_length
-    )
-    print(f"Sentiment: {pred}-{'Positive' if pred == 1 else 'Negative'}")
-    print("Score:", proba)
+        user_input = input("Input your text to be predicted. Or type 'end' to stop.\n")
+        pred, proba = predict(
+            user_input, trained_model, stopword_set,
+            trained_tokenizer, PAD_TYPE, TRUNC_TYPE, max_length
+        )
+        print(f"Sentiment: {pred}-{'Positive' if pred == 1 else 'Negative'}")
+        print("Score:", proba)
