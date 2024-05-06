@@ -65,7 +65,7 @@ def predict_audio_file(model, audio_path):
     x = x[tf.newaxis,...]
 
     prediction = model(x)
-    pred = tf.argmax(prediction, axis=1).numpy()[0]
-    proba = tf.max(prediction, axis=1).numpy()[0]
+    pred = tf.argmax(prediction, axis=-1).numpy()[0]
+    proba = tf.reduce_max(prediction, axis=-1, keepdims=False).numpy()[0]
     label_pred = LABELS[pred]
     return pred, label_pred, proba
