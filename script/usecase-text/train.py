@@ -58,9 +58,9 @@ saved_model_path = args.saved_model_path
 
 ##########################
 
-train_data = load_dataset("csv", data_files=os.path.join(dataset_path, "train_set.csv"))
-valid_data = load_dataset("csv", data_files=os.path.join(dataset_path, "valid_set.csv"))
-test_data = load_dataset("csv", data_files=os.path.join(dataset_path, "train_set.csv"))
+train_data = load_dataset("csv", data_files=os.path.join(dataset_path, "train_set.csv"))["train"]
+valid_data = load_dataset("csv", data_files=os.path.join(dataset_path, "valid_set.csv"))["train"]
+test_data = load_dataset("csv", data_files=os.path.join(dataset_path, "train_set.csv"))["train"]
 
 stopword_set = set(stopwords.words("english"))
 
