@@ -43,11 +43,11 @@
 
 ### For notebooks
 
-You can explore the step-by-step process for each use case in the directory [`./assessment-mini-project/notebook`](./assessment-mini-project/notebook).
+You can explore the step-by-step process for each use case in the directory `assessment-mini-project/notebook`.
 
 ### For training & inference pipelines
 
-- Go to the directory [`script`](./assessment-mini-project/script) `cd assessment-mini-project/script/<your-desired-usecase>`
+- Go to the directory `script` by using `cd assessment-mini-project/script/<your-desired-usecase>`
 - Run the Python script `python train.py --<arg>==<param>` for training pipeline
 - Run the Python script `python inference.py --<arg>==<param>` for inference pipeline
 
