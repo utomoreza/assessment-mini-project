@@ -8,9 +8,11 @@ seed = 1
 tf.random.set_seed(seed)
 np.random.seed(seed)
 
+home_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 EPOCHS = 10
 LABELS = ['no', 'yes', 'down', 'go', 'left', 'up', 'right', 'stop']
-DATASET_PATH = './dataset/usecase-audio/mini_speech_commands'
+DATASET_PATH = os.path.join(home_dir, 'dataset/usecase-audio/mini_speech_commands')
 
 #######################
 

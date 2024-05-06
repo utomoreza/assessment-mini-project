@@ -1,5 +1,6 @@
 """Script for Training Pipeline in use case Audio"""
 
+import os
 import pathlib
 import argparse
 
@@ -38,11 +39,14 @@ saved_model_path = args.saved_model_path
 # download data if not existing
 data_dir = pathlib.Path(DATASET_PATH)
 if not data_dir.exists():
-  tf.keras.utils.get_file(
-      'mini_speech_commands.zip',
-      origin="http://storage.googleapis.com/download.tensorflow.org/data/mini_speech_commands.zip",
-      extract=True,
-      cache_dir='.', cache_subdir='data')
+    # Create the directory
+    os.makedirs(data_dir)
+    tf.keras.utils.get_file(
+        'mini_speech_commands.zip',
+        origin="http://storage.googleapis.com/download.tensorflow.org/data/mini_speech_commands.zip",
+        extract=True,
+        cache_dir=data_dir, #cache_subdir='data'
+    )
 
 # load data
 train_ds, val_ds = tf.keras.utils.audio_dataset_from_directory(
