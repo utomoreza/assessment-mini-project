@@ -61,5 +61,5 @@ if interactive:
         user_input, trained_model, stopword_set,
         trained_tokenizer, PAD_TYPE, TRUNC_TYPE, max_length
     )
-    print(f"Sentiment: {pred}-{'Positive' if pred 1 else 'Negative'}")
+    print(f"Sentiment: {pred}-{'Positive' if pred == 1 else 'Negative'}")
     print("Score:", proba)
