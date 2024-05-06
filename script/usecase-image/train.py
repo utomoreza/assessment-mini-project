@@ -37,6 +37,7 @@ saved_model_path = args.saved_model_path
 #######################
 
 # Adding TF Cifar10 Data ..
+print("Collecting data ...")
 (X_train, y_train), (X_test, y_test) = cifar10.load_data()
 
 X_val, X_test, y_val, y_test = train_test_split(
@@ -56,6 +57,7 @@ y_val = tf.keras.utils.to_categorical(y_val, num_classes)
 y_test = tf.keras.utils.to_categorical(y_test, num_classes)
 
 # setup model
+print("Preparing for modelling ...")
 model = ResNet34()
 model.compile(
     optimizer="adam", loss='categorical_crossentropy',
@@ -71,6 +73,7 @@ callback = keras.callbacks.EarlyStopping(
 )
 
 # start training
+print("Training model...")
 history = model.fit(
     X_train, y_train, batch_size=BATCH_SIZE,
     epochs=EPOCHS, shuffle=True,
@@ -79,6 +82,7 @@ history = model.fit(
 )
 
 # evaluate the trained model
+print("Evaluating model ...")
 test_loss, test_acc, test_prec, test_rec, test_f1score = model.evaluate(X_test, y_test)
 print("Test Loss:", test_loss)
 print("Test Accuracy:", test_acc)

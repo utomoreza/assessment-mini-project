@@ -175,6 +175,7 @@ history = model.fit(
 )
 
 # evaluate the trained model
+print("Evaluating model ...")
 test_loss, test_acc = model.evaluate(X_test, y_test)
 print('Test Loss:', test_loss)
 print('Test Accuracy:', test_acc)
