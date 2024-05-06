@@ -38,6 +38,8 @@ seed = 1
 tf.random.set_seed(seed)
 np.random.seed(seed)
 
+home_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 ##########################
 
 # collect args
@@ -47,7 +49,8 @@ parser.add_argument("--model-type", type=str,
                     required=True)
 parser.add_argument("--dataset-path", type=str,
                     help="Set path for the dataset used for training. Default: './dataset/usecase-text'.",
-                    default='./dataset/usecase-text', required=False)
+                    default=os.path.join(home_dir, 'dataset/usecase-text'),
+                    required=False)
 parser.add_argument("--saved-model-path", type=str,
                     help="If you want to save the tokenizer and entire model, input the path to save them.",
                     default=None, required=False)
