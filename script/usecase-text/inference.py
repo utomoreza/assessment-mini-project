@@ -57,6 +57,7 @@ if interactive:
     user_input = ""
     while user_input.lower() != "end":
         user_input = input("Input your text to be predicted. Or type 'end' to stop.\n")
+        if user_input.lower() == "end": break
         pred, proba = predict(
             user_input, trained_model, stopword_set,
             trained_tokenizer, PAD_TYPE, TRUNC_TYPE, max_length
