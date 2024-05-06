@@ -37,6 +37,7 @@ saved_model_path = args.saved_model_path
 
 
 # download data if not existing
+print("Collecting data if unavailable ...")
 data_dir = pathlib.Path(DATASET_PATH)
 if not data_dir.exists():
     # Create the directory
@@ -45,12 +46,13 @@ if not data_dir.exists():
         'mini_speech_commands.zip',
         origin="http://storage.googleapis.com/download.tensorflow.org/data/mini_speech_commands.zip",
         extract=True,
-        cache_dir=data_dir, #cache_subdir='data'
+        cache_dir=data_dir, cache_subdir='datasets/mini_speech_commands'
     )
 
 # load data
+print("Loading data ...")
 train_ds, val_ds = tf.keras.utils.audio_dataset_from_directory(
-    directory=data_dir,
+    directory=data_dir/"datasets/mini_speech_commands",
     batch_size=64,
     validation_split=0.2,
     seed=0,
@@ -60,6 +62,7 @@ train_ds, val_ds = tf.keras.utils.audio_dataset_from_directory(
 
 label_names = np.array(train_ds.class_names)
 
+print("Preprocessing data ...")
 # squeeze train & valid sets
 train_ds = train_ds.map(squeeze, tf.data.AUTOTUNE)
 val_ds = val_ds.map(squeeze, tf.data.AUTOTUNE)
@@ -82,6 +85,7 @@ val_spectrogram_ds = val_spectrogram_ds.cache().prefetch(tf.data.AUTOTUNE)
 test_spectrogram_ds = test_spectrogram_ds.cache().prefetch(tf.data.AUTOTUNE)
 
 # define model
+print("Preparing for modelling ...")
 input_shape = example_spectrograms.shape[1:]
 num_labels = len(label_names)
 
@@ -114,6 +118,7 @@ model.compile(
 )
 
 # start training
+print("Training the model ...")
 history = model.fit(
     train_spectrogram_ds,
     validation_data=val_spectrogram_ds,
@@ -121,6 +126,7 @@ history = model.fit(
     callbacks=tf.keras.callbacks.EarlyStopping(verbose=1, patience=2),
 )
 
+print("Evaluating the model ...")
 test_loss, test_acc = model.evaluate(test_spectrogram_ds)
 print('Test Loss:', test_loss)
 print('Test Accuracy:', test_acc)
