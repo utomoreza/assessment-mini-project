@@ -51,7 +51,7 @@ stopword_set = set(stopwords.words("english")) # load stopwords remover
 
 # for use-case image
 print("Loading model for use case image ...")
-# model_resnet = utils_image.load_model(SAVED_MODEL_PATH_RESNET)
+model_resnet = utils_image.load_model(SAVED_MODEL_PATH_RESNET); print(model_resnet.summary())
 
 # for use-case audio
 print("Loading model for use case audio ...")
@@ -62,7 +62,7 @@ model_audio = utils_audio.load_model(SAVED_MODEL_PATH_AUDIO)
 def predict_image_bytes(model, bytes_string):
     # preprocess
     # get target_size from the dimensions of 1st layer
-    target_size = model.layers[0].output_shape[1:]
+    target_size = model.layers[0].output_shape[0][1:3]
     # read image from bytes
     img_bytes = base64.b64decode(bytes_string)
     # img_bytes = bytes(bytes_string, "utf-8")
@@ -75,7 +75,7 @@ def predict_image_bytes(model, bytes_string):
     example = np.expand_dims(example, axis=0)
     example = utils_image.normalize(example)
 
-    img.close() # close oponed image
+    img.close() # close opened image
 
     # predict
     pred = model.predict(example)
@@ -155,6 +155,7 @@ def predict_image():
     if not request.json:
         abort(400)
 
+    # get bytes then predict
     bytes_string = request.json["img_bytes"]
     y_pred, pred_label, proba = predict_image_bytes(
         model_resnet, bytes_string
@@ -162,9 +163,9 @@ def predict_image():
 
     return jsonify(
         {
-            "pred": y_pred,
+            "pred": str(y_pred),
             "pred_label": pred_label,
-            "proba": str(proba[0])
+            "proba": str(proba)
         }
     )
 
@@ -177,6 +178,7 @@ def recognize_audio():
     if not request.json:
         abort(400)
 
+    # get bytes then predict
     bytes_string = request.json["audio_bytes"]
     y_pred, pred_label, proba = recognize_audio_bytes(
         model_audio, bytes_string
