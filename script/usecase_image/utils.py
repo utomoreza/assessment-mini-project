@@ -14,7 +14,7 @@ np.random.seed(seed)
 #######################
 
 TEST_SIZE = 0.4
-BATCH_SIZE = 1 #64
+BATCH_SIZE = 64
 EPOCHS = 50
 
 code_to_label = {
