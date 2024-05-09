@@ -46,13 +46,13 @@ if not data_dir.exists():
         'mini_speech_commands.zip',
         origin="http://storage.googleapis.com/download.tensorflow.org/data/mini_speech_commands.zip",
         extract=True,
-        cache_dir=data_dir, cache_subdir='datasets/mini_speech_commands'
+        cache_dir=data_dir, cache_subdir='data'
     )
 
 # load data
 print("Loading data ...")
 train_ds, val_ds = tf.keras.utils.audio_dataset_from_directory(
-    directory=data_dir/"datasets/mini_speech_commands",
+    directory=data_dir/"data/mini_speech_commands",
     batch_size=64,
     validation_split=0.2,
     seed=0,
