@@ -80,6 +80,13 @@ The list of args for each script:
         - `--audio-path=AUDIO_PATH`
         Set the full path of audio to be predicted. This arg is required.
 
+### Using Streamlit and Flask REST API
+
+- Run Flask server: `cd app && python api.py`
+- Run Streamlit app: `streamlit run app/app.py --server.runOnSave True --theme.base="light"`
+    - If you want to set the port, add more arg: `--port.server=<port-number>`, e.g. `--port.server=8080`
+- Open `http://localhost:8051` (or using another port-number you set) on your browser
+
 ## References
 
 ### For text use case
