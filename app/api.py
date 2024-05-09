@@ -51,7 +51,7 @@ stopword_set = set(stopwords.words("english")) # load stopwords remover
 
 # for use-case image
 print("Loading model for use case image ...")
-model_resnet = utils_image.load_model(SAVED_MODEL_PATH_RESNET); print(model_resnet.summary())
+model_resnet = utils_image.load_model(SAVED_MODEL_PATH_RESNET)
 
 # for use-case audio
 print("Loading model for use case audio ...")
