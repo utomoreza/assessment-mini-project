@@ -1,4 +1,6 @@
 import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' # disable TF warnings
+
 import re
 import pickle
 import string
