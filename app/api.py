@@ -1,9 +1,9 @@
 import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' # disable TF warnings
+
 import io
 import sys
 import base64
-import warnings
-warnings.filterwarnings("ignore")
 
 import numpy as np
 
@@ -51,7 +51,7 @@ stopword_set = set(stopwords.words("english")) # load stopwords remover
 
 # for use-case image
 print("Loading model for use case image ...")
-model_resnet = utils_image.load_model(SAVED_MODEL_PATH_RESNET)
+# model_resnet = utils_image.load_model(SAVED_MODEL_PATH_RESNET)
 
 # for use-case audio
 print("Loading model for use case audio ...")

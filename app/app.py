@@ -1,13 +1,12 @@
 import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' # disable TF warnings
+
 import base64
 import requests
-import warnings
 
 from io import BytesIO
 
 import streamlit as st
-
-warnings.filterwarnings("ignore")
 
 ##################
 
