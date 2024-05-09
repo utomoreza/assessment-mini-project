@@ -1,6 +1,8 @@
 """Script for Training Pipeline in use case Text"""
 
 import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' # disable TF warnings
+
 import argparse
 
 import numpy as np
